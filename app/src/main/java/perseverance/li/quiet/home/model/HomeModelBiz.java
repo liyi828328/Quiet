@@ -33,22 +33,4 @@ public class HomeModelBiz implements IHomeModelBiz {
         Observable<GankDataModule> obs = gankData.loadGankData(type, size, page);
         return obs;
     }
-
-    @Override
-    public void onLoadWelfareData(int start, int count) {
-
-    }
-
-    @Override
-    public void onSwitchType(QuietPageType type) {
-        if (type == null) {
-            return;
-        }
-        switch (type) {
-            case QUIET_DAILY_TYPE:
-                break;
-            case QUIET_WELFARE_TYPE:
-                break;
-        }
-    }
 }

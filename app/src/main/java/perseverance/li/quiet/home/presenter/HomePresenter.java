@@ -31,6 +31,7 @@ import perseverance.li.quiet.util.GankApiDateUtil;
  * Create: 2017/5/31 15:25
  * ---------------------------------------------------------------
  * Describe:
+ * 首页Presenter
  * ---------------------------------------------------------------
  * Changes:
  * ---------------------------------------------------------------
@@ -197,7 +198,12 @@ public class HomePresenter extends BasePresenter<IHomeView> {
      * @param type
      */
     public void changeLoadDataByType(QuietPageType type) {
-        if (type != null && type.equals(mCurrentPageType)) {
+        //TODO:一下if中的页面还没有做，直接return
+        if (type == null || type.equals(mCurrentPageType)
+                || type.equals(QuietPageType.QUIET_ABOUT_TYPE)
+                || type.equals(QuietPageType.QUIET_APP_SHARE_TYPE)
+                || type.equals(QuietPageType.QUIET_RECREATION_TYPE)
+                || type.equals(QuietPageType.QUIET_SHARE_TYPE)) {
             return;
         }
 

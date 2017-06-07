@@ -37,19 +37,4 @@ public interface IHomeModelBiz extends IBaseModel {
      * @return
      */
     Observable<GankDataModule> onLoadGankDataByType(String type, int size, int page);
-
-    /**
-     * 加载福利
-     *
-     * @param start
-     * @param count
-     */
-    void onLoadWelfareData(int start, int count);
-
-    /**
-     * 切换数据源
-     *
-     * @param type
-     */
-    void onSwitchType(QuietPageType type);
 }
