@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">靜謐</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="quiet_nav_header_name">靜謐-靜夜之思</string>
+
+    <string name="nav_item_welfare">福利专区</string>
+    <string name="nav_item_daily">每日精彩</string>
+    <string name="nav_item_app">应用分享</string>
+    <string name="nav_item_recreation">娱乐互动</string>
+    <string name="nav_item_share">分享</string>
+    <string name="nav_item_about">关于</string>
+    <string name="nav_title">更多</string>
+</resources>

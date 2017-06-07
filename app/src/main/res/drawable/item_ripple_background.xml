@@ -1,0 +1,6 @@
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/quiet_theme_color">
+    <item android:id="@android:id/mask">
+        <color android:color="@android:color/white" />
+    </item>
+</ripple>

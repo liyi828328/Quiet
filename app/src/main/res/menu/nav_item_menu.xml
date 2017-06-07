@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_daily"
+            android:icon="@mipmap/nav_item_daily"
+            android:title="@string/nav_item_daily" />
+        <item
+            android:id="@+id/nav_welfare"
+            android:icon="@mipmap/nav_item_welfare"
+            android:title="@string/nav_item_welfare" />
+
+        <item
+            android:id="@+id/nav_app"
+            android:icon="@mipmap/nav_item_app"
+            android:title="@string/nav_item_app" />
+        <item
+            android:id="@+id/nav_recreation"
+            android:icon="@mipmap/nav_item_recreation"
+            android:title="@string/nav_item_recreation" />
+    </group>
+
+    <item android:title="@string/nav_title">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@mipmap/nav_item_share"
+                android:title="@string/nav_item_share" />
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@mipmap/nav_item_about"
+                android:title="@string/nav_item_about" />
+        </menu>
+    </item>
+
+</menu>

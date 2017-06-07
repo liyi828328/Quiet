@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#87CEFA</color>
+    <color name="colorAccent">@color/colorPrimary</color>
+    <color name="quiet_theme_color">#CE577A</color>
+    <color name="nav_item_icon_selected_color">@color/quiet_theme_color</color>
+</resources>
