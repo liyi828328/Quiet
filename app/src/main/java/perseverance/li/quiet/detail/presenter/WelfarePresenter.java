@@ -16,4 +16,8 @@ import perseverance.li.quiet.detail.view.IWelfareDetailView;
  * ---------------------------------------------------------------
  */
 public class WelfarePresenter extends BasePresenter<IWelfareDetailView> {
+
+    public void saveWelfarePicture(String imageUrl) {
+    }
+
 }

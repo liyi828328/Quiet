@@ -1,6 +1,7 @@
 package perseverance.li.quiet.home;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,7 +12,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,11 +21,12 @@ import java.util.List;
 
 import perseverance.li.quiet.R;
 import perseverance.li.quiet.base.BaseActivity;
-import perseverance.li.quiet.bean.BaseGankData;
-import perseverance.li.quiet.home.adapter.DailyDataAdapter;
 import perseverance.li.quiet.base.OnRecyclerViewItemClickListener;
-import perseverance.li.quiet.home.adapter.WelfareDataAdapter;
+import perseverance.li.quiet.bean.BaseGankData;
 import perseverance.li.quiet.bean.DailyModule;
+import perseverance.li.quiet.detail.WelfareDetailActivity;
+import perseverance.li.quiet.home.adapter.DailyDataAdapter;
+import perseverance.li.quiet.home.adapter.WelfareDataAdapter;
 import perseverance.li.quiet.home.model.QuietPageType;
 import perseverance.li.quiet.home.presenter.HomePresenter;
 import perseverance.li.quiet.home.view.IHomeView;
@@ -60,14 +61,22 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements Navigat
     }
 
     @Override
+    protected void onMenuHome() {
+        //Don't do anything
+    }
+
+    @Override
+    protected void initToolbar() {
+        super.initToolbar();
+        mActionbar.setDisplayHomeAsUpEnabled(false);
+    }
+
+    @Override
     public void initView() {
         mActivity = this;
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawerLayout.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -218,6 +227,18 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements Navigat
     @Override
     public void onItemClick(View view, int position) {
         Toast.makeText(this, "item click position: " + position, Toast.LENGTH_SHORT).show();
+
+        QuietPageType type = mPresenter.getCurrentPageType();
+        switch (type) {
+            case QUIET_WELFARE_TYPE:
+                BaseGankData baseGankData = mWelfareDataAdapter.getDataByPosition(position);
+                Intent intent = new Intent(this, WelfareDetailActivity.class);
+                intent.putExtra(WelfareDetailActivity.IMAGE_URL_TAG, baseGankData.url);
+                startActivity(intent);
+                break;
+            case QUIET_DAILY_TYPE:
+                break;
+        }
     }
 
     /**

@@ -14,4 +14,6 @@
     <string name="nav_item_share">分享</string>
     <string name="nav_item_about">关于</string>
     <string name="nav_title">更多</string>
+
+    <string name="welfare_title">福利</string>
 </resources>

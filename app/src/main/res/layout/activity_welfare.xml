@@ -3,6 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="perseverance.li.quiet.welfare.view.WelfareActivity">
+    tools:context="perseverance.li.quiet.detail.WelfareDetailActivity">
+
+    <include
+        layout="@layout/toolbar_layout"
+        android:fitsSystemWindows="true" />
+
+    <android.support.v7.widget.CardView
+        android:layout_margin="20dp"
+        style="@style/CardViewStyle"
+        android:layout_below="@+id/appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/welfare_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/ic_launcher" />
+    </android.support.v7.widget.CardView>
 
 </RelativeLayout>

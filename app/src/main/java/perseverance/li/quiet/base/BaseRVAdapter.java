@@ -77,6 +77,16 @@ public abstract class BaseRVAdapter<T> extends RecyclerView.Adapter<BaseRViewHol
     }
 
     /**
+     * 根据id获取数据
+     *
+     * @param position
+     * @return
+     */
+    public T getDataByPosition(int position) {
+        return mDataList.get(position);
+    }
+
+    /**
      * 设置item监听
      *
      * @param viewHolder
