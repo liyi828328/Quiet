@@ -1,11 +1,9 @@
 package perseverance.li.quiet.util;
 
 import android.text.format.DateUtils;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**

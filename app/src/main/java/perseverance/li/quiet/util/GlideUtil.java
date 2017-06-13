@@ -1,8 +1,6 @@
 package perseverance.li.quiet.util;
 
 import android.app.Activity;
-import android.content.Context;
-import android.net.Uri;
 import android.support.annotation.DrawableRes;
 import android.widget.ImageView;
 
@@ -58,28 +56,4 @@ public class GlideUtil {
         }
         Glide.get(activity).clearMemory();
     }
-//
-//    /**
-//     * 重新加载
-//     *
-//     * @param activity
-//     */
-//    public static void resumeRequests(Activity activity) {
-//        if (activity == null) {
-//            return;
-//        }
-//        Glide.with(activity).resumeRequests();
-//    }
-//
-//    /**
-//     * 停止加载
-//     *
-//     * @param activity
-//     */
-//    public static void pauseRequests(Activity activity) {
-//        if (activity == null) {
-//            return;
-//        }
-//        Glide.with(activity).pauseRequests();
-//    }
 }

@@ -23,7 +23,7 @@ import perseverance.li.quiet.R;
 import perseverance.li.quiet.base.BaseActivity;
 import perseverance.li.quiet.base.BaseGankData;
 import perseverance.li.quiet.home.adapter.DailyDataAdapter;
-import perseverance.li.quiet.home.adapter.OnRecyclerViewItemClickListener;
+import perseverance.li.quiet.base.OnRecyclerViewItemClickListener;
 import perseverance.li.quiet.home.adapter.WelfareDataAdapter;
 import perseverance.li.quiet.home.model.DailyModule;
 import perseverance.li.quiet.home.model.QuietPageType;
@@ -46,6 +46,8 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements Navigat
     private Activity mActivity;
     private SpacingItemDecoration mLinearDecoration;
     private SpacingItemDecoration mStaggeredDecoration;
+    private LinearLayoutManager mLinearLayoutManager;
+    private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
 
     @Override
     public HomePresenter getPresenter() {
@@ -77,9 +79,11 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements Navigat
 
         mLinearDecoration = new SpacingItemDecoration(RECYCLERVIEW_LINEAR,
                 mActivity.getResources().getDimensionPixelSize(R.dimen.item_padding), true);
-
         mStaggeredDecoration = new SpacingItemDecoration(RECYCLERVIEW_STAGGERED,
                 mActivity.getResources().getDimensionPixelSize(R.dimen.item_padding), true);
+        mLinearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(RECYCLERVIEW_STAGGERED, StaggeredGridLayoutManager.VERTICAL);
+
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.home_content_refresh_layout);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.nav_item_icon_selected_color);
@@ -88,6 +92,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements Navigat
         mRecyclerView = (RecyclerView) findViewById(R.id.home_content_recyclerview);
         mRecyclerView.addOnScrollListener(getRecyclerViewOnScrollListener());
         mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setItemAnimator(null);
 
         mDailyDataAdapter = new DailyDataAdapter(this);
         mDailyDataAdapter.setOnItemClickListener(this);
@@ -204,8 +209,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements Navigat
         //是否为线性显示的布局
         boolean isLinear = pageType.equals(QuietPageType.QUIET_DAILY_TYPE);
         mRecyclerView.removeAllViews();
-        mRecyclerView.setLayoutManager(isLinear ? new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-                : new StaggeredGridLayoutManager(RECYCLERVIEW_STAGGERED, StaggeredGridLayoutManager.VERTICAL));
+        mRecyclerView.setLayoutManager(isLinear ? mLinearLayoutManager : mStaggeredGridLayoutManager);
         mRecyclerView.removeItemDecoration(isLinear ? mStaggeredDecoration : mLinearDecoration);
         mRecyclerView.addItemDecoration(isLinear ? mLinearDecoration : mStaggeredDecoration);
         mRecyclerView.setAdapter(isLinear ? mDailyDataAdapter : mWelfareDataAdapter);

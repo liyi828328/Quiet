@@ -4,7 +4,6 @@ import android.util.Log;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.internal.operators.maybe.MaybeConcatArray;
 
 /**
  * ---------------------------------------------------------------

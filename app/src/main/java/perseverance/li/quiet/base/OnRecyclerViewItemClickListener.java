@@ -1,4 +1,4 @@
-package perseverance.li.quiet.home.adapter;
+package perseverance.li.quiet.base;
 
 import android.view.View;
 
