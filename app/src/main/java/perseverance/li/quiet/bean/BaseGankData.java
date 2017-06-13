@@ -1,4 +1,4 @@
-package perseverance.li.quiet.base;
+package perseverance.li.quiet.bean;
 
 import com.google.gson.annotations.SerializedName;
 

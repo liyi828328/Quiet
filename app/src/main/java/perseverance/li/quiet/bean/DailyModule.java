@@ -1,10 +1,10 @@
-package perseverance.li.quiet.home.model;
+package perseverance.li.quiet.bean;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-import perseverance.li.quiet.base.BaseGankData;
+import perseverance.li.quiet.bean.BaseGankData;
 
 /**
  * ---------------------------------------------------------------

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import perseverance.li.quiet.R;
-import perseverance.li.quiet.base.BaseGankData;
+import perseverance.li.quiet.bean.BaseGankData;
 import perseverance.li.quiet.base.BaseRVAdapter;
 import perseverance.li.quiet.base.BaseRViewHolder;
 import perseverance.li.quiet.util.GlideUtil;

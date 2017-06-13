@@ -21,11 +21,11 @@ import java.util.List;
 
 import perseverance.li.quiet.R;
 import perseverance.li.quiet.base.BaseActivity;
-import perseverance.li.quiet.base.BaseGankData;
+import perseverance.li.quiet.bean.BaseGankData;
 import perseverance.li.quiet.home.adapter.DailyDataAdapter;
 import perseverance.li.quiet.base.OnRecyclerViewItemClickListener;
 import perseverance.li.quiet.home.adapter.WelfareDataAdapter;
-import perseverance.li.quiet.home.model.DailyModule;
+import perseverance.li.quiet.bean.DailyModule;
 import perseverance.li.quiet.home.model.QuietPageType;
 import perseverance.li.quiet.home.presenter.HomePresenter;
 import perseverance.li.quiet.home.view.IHomeView;

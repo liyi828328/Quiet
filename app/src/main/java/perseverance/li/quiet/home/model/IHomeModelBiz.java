@@ -2,6 +2,8 @@ package perseverance.li.quiet.home.model;
 
 import io.reactivex.Observable;
 import perseverance.li.quiet.base.IBaseModel;
+import perseverance.li.quiet.bean.DailyModule;
+import perseverance.li.quiet.bean.GankDataModule;
 
 /**
  * ---------------------------------------------------------------

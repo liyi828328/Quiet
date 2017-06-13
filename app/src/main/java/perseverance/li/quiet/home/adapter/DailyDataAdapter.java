@@ -9,11 +9,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import perseverance.li.quiet.R;
-import perseverance.li.quiet.base.BaseGankData;
+import perseverance.li.quiet.bean.BaseGankData;
 import perseverance.li.quiet.base.BaseRVAdapter;
 import perseverance.li.quiet.base.BaseRViewHolder;
-import perseverance.li.quiet.home.model.DailyModule;
-import perseverance.li.quiet.home.model.DailyModule.DailyResults;
+import perseverance.li.quiet.bean.DailyModule;
+import perseverance.li.quiet.bean.DailyModule.DailyResults;
 import perseverance.li.quiet.util.Constant;
 import perseverance.li.quiet.util.GlideUtil;
 

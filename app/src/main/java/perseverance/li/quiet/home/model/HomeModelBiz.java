@@ -1,8 +1,10 @@
 package perseverance.li.quiet.home.model;
 
 import io.reactivex.Observable;
-import perseverance.li.quiet.home.gank.GankDaily;
-import perseverance.li.quiet.home.gank.GankData;
+import perseverance.li.quiet.bean.DailyModule;
+import perseverance.li.quiet.bean.GankDataModule;
+import perseverance.li.quiet.gank.GankDaily;
+import perseverance.li.quiet.gank.GankData;
 import perseverance.li.quiet.util.RetrofitManager;
 
 /**
