@@ -1,5 +1,7 @@
 package perseverance.li.quiet.detail.view;
 
+import android.provider.Settings;
+
 import perseverance.li.quiet.base.IBaseView;
 
 /**
@@ -15,4 +17,7 @@ import perseverance.li.quiet.base.IBaseView;
  * ---------------------------------------------------------------
  */
 public interface IWelfareDetailView extends IBaseView {
+
+    void saveImageSuccess();
+
 }
