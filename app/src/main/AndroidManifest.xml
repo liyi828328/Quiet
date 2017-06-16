@@ -30,6 +30,12 @@
             android:label="@string/welfare_title"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".web.WebActivity"
+            android:label="@string/web_label"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

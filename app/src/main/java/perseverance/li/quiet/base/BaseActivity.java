@@ -10,11 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,17 +35,17 @@ import perseverance.li.quiet.util.ToastUtil;
  * 2017/5/27 17 : Create by LiYi
  * ---------------------------------------------------------------
  */
-public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements IBaseView {
+public abstract class BaseActivity<T extends BasePresenter> extends BaseToolbarActivity implements IBaseView {
 
     private static final String TAG = "BaseActivity";
     /**
      * 权限请求Code
      */
     private static final int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 101;
+    /**
+     * 绑定的presenter
+     */
     protected T mPresenter;
-    protected Toolbar mToolbar;
-    protected ActionBar mActionbar;
-
     /**
      * 获取所绑定的presenter
      *
@@ -57,36 +53,12 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
      */
     public abstract T getPresenter();
 
-    /**
-     * 获取布局id
-     *
-     * @return
-     */
-    protected abstract int getLayoutId();
-
-    /**
-     * ActionBar 返回键监听处理
-     */
-    protected abstract void onMenuHome();
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayoutId());
         checkPermission();
         init();
-        initToolbar();
         initView();
-    }
-
-    /**
-     * 初始化toolbar
-     */
-    protected void initToolbar() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
-        mActionbar = getSupportActionBar();
-        mActionbar.setDisplayHomeAsUpEnabled(true);
     }
 
     private void init() {
@@ -94,18 +66,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         if (mPresenter != null) {
             mPresenter.create(this);
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onMenuHome();
-                break;
-            default:
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

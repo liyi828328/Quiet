@@ -1,22 +1,15 @@
 package perseverance.li.quiet.detail;
 
-import android.graphics.Color;
-import android.media.Image;
-import android.provider.Settings;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import perseverance.li.quiet.R;
 import perseverance.li.quiet.base.BaseActivity;
 import perseverance.li.quiet.detail.presenter.WelfarePresenter;
 import perseverance.li.quiet.detail.view.IWelfareDetailView;
-import perseverance.li.quiet.util.GlideUtil;
 import perseverance.li.quiet.util.ToastUtil;
 
 /**
@@ -35,6 +28,8 @@ public class WelfareDetailActivity extends BaseActivity<WelfarePresenter> implem
 
     public static final String IMAGE_URL_TAG = "image_url";
     private String mImageUrl;
+    private ProgressBar mProgressBar;
+    private ImageView mImageView;
 
     @Override
     public WelfarePresenter getPresenter() {
@@ -59,14 +54,16 @@ public class WelfareDetailActivity extends BaseActivity<WelfarePresenter> implem
 
     @Override
     public void initView() {
+        mProgressBar = (ProgressBar) findViewById(R.id.welfare_progressbar);
         mImageUrl = getIntent().getStringExtra(IMAGE_URL_TAG);
-        ImageView imgView = (ImageView) findViewById(R.id.welfare_image);
-        GlideUtil.displayUrl(this, imgView, mImageUrl, R.mipmap.img_default_gray);
+        mImageView = (ImageView) findViewById(R.id.welfare_image);
+        mPresenter.loadWelfarePicture(this, mImageView, mImageUrl);
     }
 
     @Override
     public void onLoadFailure(Throwable e) {
-
+        ToastUtil.showShort(this, "图片加载失败，error msg : " + e.getMessage());
+        mImageView.setImageResource(R.mipmap.img_load_error);
     }
 
 
@@ -79,8 +76,6 @@ public class WelfareDetailActivity extends BaseActivity<WelfarePresenter> implem
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.menu_save) {
             mPresenter.saveWelfarePicture(mImageUrl);
             return true;
@@ -90,7 +85,12 @@ public class WelfareDetailActivity extends BaseActivity<WelfarePresenter> implem
     }
 
     @Override
-    public void saveImageSuccess() {
+    public void onSaveImageSuccess() {
         ToastUtil.showShort(this, "保存图片成功");
+    }
+
+    @Override
+    public void onLoadImageSuccess() {
+        mProgressBar.setVisibility(View.GONE);
     }
 }

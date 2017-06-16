@@ -2,9 +2,8 @@ package perseverance.li.quiet.bean;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-
-import perseverance.li.quiet.bean.BaseGankData;
 
 /**
  * ---------------------------------------------------------------
@@ -18,7 +17,7 @@ import perseverance.li.quiet.bean.BaseGankData;
  * 2017/6/6 15 : Create by LiYi
  * ---------------------------------------------------------------
  */
-public class GankDataModule {
+public class GankDataModule implements Serializable {
 
     @SerializedName("results")
     public ArrayList<BaseGankData> results;

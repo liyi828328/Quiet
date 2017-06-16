@@ -2,6 +2,7 @@ package perseverance.li.quiet.bean;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -16,7 +17,7 @@ import java.util.Date;
  * 2017/6/1 09 : Create by LiYi
  * ---------------------------------------------------------------
  */
-public class BaseGankData {
+public class BaseGankData implements Serializable {
 
     //id
     @SerializedName("_id")

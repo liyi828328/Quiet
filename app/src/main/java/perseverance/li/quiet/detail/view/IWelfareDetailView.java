@@ -18,6 +18,7 @@ import perseverance.li.quiet.base.IBaseView;
  */
 public interface IWelfareDetailView extends IBaseView {
 
-    void saveImageSuccess();
+    void onSaveImageSuccess();
 
+    void onLoadImageSuccess();
 }

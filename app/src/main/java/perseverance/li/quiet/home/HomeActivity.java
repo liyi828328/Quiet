@@ -30,6 +30,7 @@ import perseverance.li.quiet.home.adapter.WelfareDataAdapter;
 import perseverance.li.quiet.home.model.QuietPageType;
 import perseverance.li.quiet.home.presenter.HomePresenter;
 import perseverance.li.quiet.home.view.IHomeView;
+import perseverance.li.quiet.web.WebActivity;
 
 public class HomeActivity extends BaseActivity<HomePresenter> implements NavigationView.OnNavigationItemSelectedListener,
         SwipeRefreshLayout.OnRefreshListener,
@@ -215,6 +216,9 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements Navigat
                 startActivity(intent);
                 break;
             case QUIET_DAILY_TYPE:
+
+                Intent webIntent = new Intent(this, WebActivity.class);
+                startActivity(webIntent);
                 break;
         }
     }

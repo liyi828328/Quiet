@@ -2,9 +2,8 @@ package perseverance.li.quiet.bean;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-
-import perseverance.li.quiet.bean.BaseGankData;
 
 /**
  * ---------------------------------------------------------------
@@ -18,7 +17,7 @@ import perseverance.li.quiet.bean.BaseGankData;
  * 2017/5/31 16 : Create by LiYi
  * ---------------------------------------------------------------
  */
-public class DailyModule {
+public class DailyModule implements Serializable {
 
     @SerializedName("results")
     public DailyResults results;
