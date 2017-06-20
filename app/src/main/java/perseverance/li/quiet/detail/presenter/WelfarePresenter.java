@@ -33,18 +33,9 @@ import perseverance.li.quiet.util.GlideUtil;
  * 2017/6/13 14 : Create by LiYi
  * ---------------------------------------------------------------
  */
-public class WelfarePresenter extends BasePresenter<IWelfareDetailView> {
+public class WelfarePresenter extends BasePresenter<IWelfareDetailView> implements IWelfarePresenter {
 
-    public void saveWelfarePicture(String imageUrl) {
-    }
-
-    /**
-     * 加载图片
-     *
-     * @param activity
-     * @param view
-     * @param url
-     */
+    @Override
     public void loadWelfarePicture(final Activity activity, ImageView view, String url) {
         //如果activity已经销毁，不在加载
         if (activity == null || activity.isFinishing() || activity.isDestroyed()) {

@@ -1,27 +1,28 @@
-package perseverance.li.quiet.detail.view;
+package perseverance.li.quiet.detail.presenter;
 
-import android.provider.Settings;
-
-import perseverance.li.quiet.base.IBaseView;
+import android.app.Activity;
+import android.widget.ImageView;
 
 /**
  * ---------------------------------------------------------------
  * Author: LiYi
- * Create: 2017/6/13 14:01
+ * Create: 2017/6/19 11:15
  * ---------------------------------------------------------------
  * Describe:
  * ---------------------------------------------------------------
  * Changes:
  * ---------------------------------------------------------------
- * 2017/6/13 14 : Create by LiYi
+ * 2017/6/19 11 : Create by LiYi
  * ---------------------------------------------------------------
  */
-public interface IWelfareDetailView extends IBaseView {
-
-    void onSaveImageSuccess();
+public interface IWelfarePresenter {
 
     /**
-     * 图片加载成功
+     * 加载图片
+     *
+     * @param activity
+     * @param view
+     * @param url
      */
-    void onLoadImageSuccess();
+    void loadWelfarePicture(final Activity activity, ImageView view, String url);
 }

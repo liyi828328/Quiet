@@ -77,7 +77,6 @@ public class WelfareDetailActivity extends BaseActivity<WelfarePresenter> implem
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.menu_save) {
-            mPresenter.saveWelfarePicture(mImageUrl);
             return true;
         }
 

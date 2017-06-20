@@ -38,7 +38,7 @@ import perseverance.li.quiet.util.GankApiDateUtil;
  * 2017/5/31 15 : Create by LiYi
  * ---------------------------------------------------------------
  */
-public class HomePresenter extends BasePresenter<IHomeView> {
+public class HomePresenter extends BasePresenter<IHomeView> implements IHomePresenter {
 
     private static final String TAG = "HomePresenter";
     private HomeModelBiz mHomeModelBiz;
@@ -57,10 +57,8 @@ public class HomePresenter extends BasePresenter<IHomeView> {
         mCurrentDate.setCurrentPagePosition(mCurrentPage);
     }
 
-    /**
-     * 获取福利
-     */
-    private void loadWelfareData() {
+    @Override
+    public void loadWelfareData() {
         DisposableObserver<List<BaseGankData>> listDisposableObserver = new DisposableObserver<List<BaseGankData>>() {
             @Override
             public void onNext(@NonNull List<BaseGankData> gankDatas) {
@@ -117,10 +115,8 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                 .subscribe(listDisposableObserver);
     }
 
-    /**
-     * 下拉刷新时，获取一定范围时间的每日数据
-     */
-    private void loadDailyListData() {
+    @Override
+    public void loadDailyListData() {
 
         DisposableObserver<List<DailyModule>> listDisposableObserver = new DisposableObserver<List<DailyModule>>() {
             @Override
@@ -192,11 +188,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                 .subscribe(listDisposableObserver);
     }
 
-    /**
-     * 切换页面
-     *
-     * @param type
-     */
+    @Override
     public void changeLoadDataByType(QuietPageType type) {
         //TODO:一下if中的页面还没有做，直接return
         if (type == null || type.equals(mCurrentPageType)
@@ -229,9 +221,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
         }
     }
 
-    /**
-     * 滑动加载更多
-     */
+    @Override
     public void loadMoreData() {
         if (mCurrentPageType == null) {
             Log.d(TAG, "load more data type : " + mCurrentPageType);
@@ -248,11 +238,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
         }
     }
 
-    /**
-     * 返回当前页面类型
-     *
-     * @return
-     */
+    @Override
     public QuietPageType getCurrentPageType() {
         return mCurrentPageType;
     }
