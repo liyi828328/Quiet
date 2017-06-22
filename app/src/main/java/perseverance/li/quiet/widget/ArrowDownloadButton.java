@@ -399,7 +399,8 @@ public class ArrowDownloadButton extends View {
         canvas.drawTextOnPath((int) progress + "%", textPath, 0, 0, textPaint);
         currentTime = (int) (currentTime + TIME_STEP);
         float sweepAngle = (progress / PROGRESS * ANGLE);
-        canvas.drawArc(oval, 270, 0 - sweepAngle, false, loadingPaint);
+        //TODO:修改为正向的加载
+        canvas.drawArc(oval, 270, sweepAngle, false, loadingPaint);
         postInvalidateDelayed(DURATION);
     }
 
