@@ -42,4 +42,9 @@ public interface IHomeView extends IBaseView {
      * @param pageType
      */
     void changeViewByType(QuietPageType pageType);
+
+    /**
+     * 敬请期待
+     */
+    void lookForwardTo();
 }

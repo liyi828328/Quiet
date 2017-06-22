@@ -1,6 +1,5 @@
 package perseverance.li.quiet.home;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.support.design.widget.NavigationView;
@@ -24,13 +23,14 @@ import perseverance.li.quiet.base.BaseActivity;
 import perseverance.li.quiet.base.OnRecyclerViewItemClickListener;
 import perseverance.li.quiet.bean.BaseGankData;
 import perseverance.li.quiet.bean.DailyModule;
+import perseverance.li.quiet.detail.DailyDetailActivity;
 import perseverance.li.quiet.detail.WelfareDetailActivity;
 import perseverance.li.quiet.home.adapter.DailyDataAdapter;
 import perseverance.li.quiet.home.adapter.WelfareDataAdapter;
 import perseverance.li.quiet.home.model.QuietPageType;
 import perseverance.li.quiet.home.presenter.HomePresenter;
 import perseverance.li.quiet.home.view.IHomeView;
-import perseverance.li.quiet.web.WebActivity;
+import perseverance.li.quiet.util.ToastUtil;
 
 public class HomeActivity extends BaseActivity<HomePresenter> implements NavigationView.OnNavigationItemSelectedListener,
         SwipeRefreshLayout.OnRefreshListener,
@@ -45,7 +45,6 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements Navigat
     private RecyclerView mRecyclerView;
     private DailyDataAdapter mDailyDataAdapter;
     private WelfareDataAdapter mWelfareDataAdapter;
-    private Activity mActivity;
     private SpacingItemDecoration mLinearDecoration;
     private SpacingItemDecoration mStaggeredDecoration;
     private LinearLayoutManager mLinearLayoutManager;
@@ -74,7 +73,6 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements Navigat
 
     @Override
     public void initView() {
-        mActivity = this;
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -104,7 +102,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements Navigat
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setItemAnimator(null);
 
-        mDailyDataAdapter = new DailyDataAdapter(this);
+        mDailyDataAdapter = new DailyDataAdapter(mActivity);
         mDailyDataAdapter.setOnItemClickListener(this);
         mWelfareDataAdapter = new WelfareDataAdapter(mActivity);
         mWelfareDataAdapter.setOnItemClickListener(this);
@@ -204,9 +202,12 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements Navigat
     }
 
     @Override
-    public void onItemClick(View view, int position) {
-        Toast.makeText(this, "item click position: " + position, Toast.LENGTH_SHORT).show();
+    public void lookForwardTo() {
+        ToastUtil.showShort(mActivity, R.string.look_forward_to);
+    }
 
+    @Override
+    public void onItemClick(View view, int position) {
         QuietPageType type = mPresenter.getCurrentPageType();
         switch (type) {
             case QUIET_WELFARE_TYPE:
@@ -216,9 +217,8 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements Navigat
                 startActivity(intent);
                 break;
             case QUIET_DAILY_TYPE:
-
-                Intent webIntent = new Intent(this, WebActivity.class);
-                startActivity(webIntent);
+                Intent dailyIntent = new Intent(this, DailyDetailActivity.class);
+                startActivity(dailyIntent);
                 break;
         }
     }

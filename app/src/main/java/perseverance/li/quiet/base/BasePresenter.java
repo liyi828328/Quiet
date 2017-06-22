@@ -20,7 +20,7 @@ import io.reactivex.disposables.Disposable;
 public abstract class BasePresenter<T extends IBaseView> {
 
     private static final String TAG = "BasePresenter";
-    private T mView;
+    protected T mView;
     private CompositeDisposable mCompositeDisposable;
 
     /**
@@ -41,15 +41,6 @@ public abstract class BasePresenter<T extends IBaseView> {
         if (mView != null) {
             mView = null;
         }
-    }
-
-    /**
-     * 返回对应的view的接口
-     *
-     * @return
-     */
-    public T getBaseView() {
-        return mView;
     }
 
     /**

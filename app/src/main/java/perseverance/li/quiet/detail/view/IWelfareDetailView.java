@@ -18,7 +18,24 @@ import perseverance.li.quiet.base.IBaseView;
  */
 public interface IWelfareDetailView extends IBaseView {
 
-    void onSaveImageSuccess();
+    /**
+     * 下周进度
+     *
+     * @param progress
+     */
+    void onDownloadProgress(float progress);
+
+    /**
+     * 保存图片失败
+     */
+    void onDownloadImageFail();
+
+    /**
+     * 下载成功
+     *
+     * @param filePath
+     */
+    void onDownloadImageSuccess(String filePath);
 
     /**
      * 图片加载成功

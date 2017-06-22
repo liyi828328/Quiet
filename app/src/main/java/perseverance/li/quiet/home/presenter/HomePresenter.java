@@ -15,8 +15,8 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
-import perseverance.li.quiet.bean.BaseGankData;
 import perseverance.li.quiet.base.BasePresenter;
+import perseverance.li.quiet.bean.BaseGankData;
 import perseverance.li.quiet.bean.DailyModule;
 import perseverance.li.quiet.bean.GankDataModule;
 import perseverance.li.quiet.home.model.HomeModelBiz;
@@ -62,18 +62,17 @@ public class HomePresenter extends BasePresenter<IHomeView> implements IHomePres
         DisposableObserver<List<BaseGankData>> listDisposableObserver = new DisposableObserver<List<BaseGankData>>() {
             @Override
             public void onNext(@NonNull List<BaseGankData> gankDatas) {
-                IHomeView homeView = getBaseView();
                 if (gankDatas == null || gankDatas.size() == 0) {
                     Log.d(TAG, "load welfare datas is null , return on load failure");
-                    if (homeView != null) {
-                        homeView.onLoadFailure(new Throwable("welfare datas is null"));
+                    if (mView != null) {
+                        mView.onLoadFailure(new Throwable("welfare datas is null"));
                     }
                     return;
                 }
 
-                if (homeView != null) {
+                if (mView != null) {
                     mWelfareDataList.addAll(gankDatas);
-                    homeView.onLoadWelfareDatasSuccess(mWelfareDataList);
+                    mView.onLoadWelfareDatasSuccess(mWelfareDataList);
                 }
                 //刷新成功一次后页面数量+1
                 mCurrentPage++;
@@ -82,9 +81,8 @@ public class HomePresenter extends BasePresenter<IHomeView> implements IHomePres
             @Override
             public void onError(@NonNull Throwable e) {
                 e.printStackTrace();
-                IHomeView homeView = getBaseView();
-                if (homeView != null) {
-                    homeView.onLoadFailure(e);
+                if (mView != null) {
+                    mView.onLoadFailure(e);
                 }
             }
 
@@ -122,11 +120,10 @@ public class HomePresenter extends BasePresenter<IHomeView> implements IHomePres
             @Override
             public void onNext(@NonNull List<DailyModule> dailyModules) {
 
-                IHomeView homeView = getBaseView();
                 if (dailyModules == null || dailyModules.size() == 0) {
                     Log.d(TAG, "load daily datas is null , return on load failure");
-                    if (homeView != null) {
-                        homeView.onLoadFailure(new Throwable("Daily datas is null"));
+                    if (mView != null) {
+                        mView.onLoadFailure(new Throwable("Daily datas is null"));
                     }
                     return;
                 }
@@ -144,9 +141,9 @@ public class HomePresenter extends BasePresenter<IHomeView> implements IHomePres
 
                 Log.d(TAG, "onNext dailyModules size iterator end: " + dailyModules.size());
                 //回调界面
-                if (homeView != null) {
+                if (mView != null) {
                     mDailyModuleList.addAll(dailyModules);
-                    homeView.onLoadDailyDatasSuccess(mDailyModuleList);
+                    mView.onLoadDailyDatasSuccess(mDailyModuleList);
                 }
                 //刷新成功一次后页面数量+1
                 mCurrentPage++;
@@ -156,9 +153,8 @@ public class HomePresenter extends BasePresenter<IHomeView> implements IHomePres
             @Override
             public void onError(@NonNull Throwable e) {
                 e.printStackTrace();
-                IHomeView homeView = getBaseView();
-                if (homeView != null) {
-                    homeView.onLoadFailure(e);
+                if (mView != null) {
+                    mView.onLoadFailure(e);
                 }
             }
 
@@ -196,14 +192,16 @@ public class HomePresenter extends BasePresenter<IHomeView> implements IHomePres
                 || type.equals(QuietPageType.QUIET_APP_SHARE_TYPE)
                 || type.equals(QuietPageType.QUIET_RECREATION_TYPE)
                 || type.equals(QuietPageType.QUIET_SHARE_TYPE)) {
+            if (mView != null) {
+                mView.lookForwardTo();
+            }
             return;
         }
 
         clearDispoable();
         mCurrentPageType = type;
-        IHomeView view = getBaseView();
-        if (view != null) {
-            view.changeViewByType(mCurrentPageType);
+        if (mView != null) {
+            mView.changeViewByType(mCurrentPageType);
         }
 
         switch (type) {

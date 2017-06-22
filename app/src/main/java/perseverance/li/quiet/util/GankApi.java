@@ -31,7 +31,7 @@ public class GankApi {
     public static final String DATA_TYPE_ALL = "all";
 
     public static final int DEFAULT_DATA_SIZE = 10;
-    public static final int DEFAULT_DAILY_SIZE = 15;
+    public static final int DEFAULT_DAILY_SIZE = 20;
 
     public static final String GANK_DATA_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
 }

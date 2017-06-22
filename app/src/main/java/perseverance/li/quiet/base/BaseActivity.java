@@ -1,6 +1,7 @@
 package perseverance.li.quiet.base;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -38,6 +39,7 @@ import perseverance.li.quiet.util.ToastUtil;
 public abstract class BaseActivity<T extends BasePresenter> extends BaseToolbarActivity implements IBaseView {
 
     private static final String TAG = "BaseActivity";
+    protected Activity mActivity;
     /**
      * 权限请求Code
      */
@@ -46,6 +48,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends BaseToolbarA
      * 绑定的presenter
      */
     protected T mPresenter;
+
     /**
      * 获取所绑定的presenter
      *
@@ -56,6 +59,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends BaseToolbarA
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mActivity = this;
         checkPermission();
         init();
         initView();

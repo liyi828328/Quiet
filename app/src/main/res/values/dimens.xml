@@ -12,4 +12,5 @@
     <dimen name="item_padding">10dp</dimen>
     <dimen name="icon_width">120dp</dimen>
     <dimen name="icon_height">90dp</dimen>
+    <dimen name="download_button_size">90dp</dimen>
 </resources>

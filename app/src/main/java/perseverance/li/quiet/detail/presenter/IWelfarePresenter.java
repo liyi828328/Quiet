@@ -1,6 +1,7 @@
 package perseverance.li.quiet.detail.presenter;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
 /**
@@ -25,4 +26,17 @@ public interface IWelfarePresenter {
      * @param url
      */
     void loadWelfarePicture(final Activity activity, ImageView view, String url);
+
+    /**
+     * 下载图片
+     *
+     * @param imageUrl
+     */
+    void downloadPicture(String imageUrl);
+
+    /**
+     * 去除高斯模糊
+     */
+    Drawable resetWelfarePicture();
+
 }
