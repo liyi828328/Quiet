@@ -23,7 +23,7 @@ import perseverance.li.quiet.R;
  * ---------------------------------------------------------------
  * Describe:
  *
- *  该空间来自github ：https://github.com/fenjuly/ArrowDownloadButton
+ * 该控件来自github ：https://github.com/fenjuly/ArrowDownloadButton
  * 此处修改了部分色值等
  * 或许可以修改适配成attr方式
  * ---------------------------------------------------------------
