@@ -39,4 +39,16 @@
         <item name="android:textColor">@color/primary_text</item>
     </style>
 
+    <style name="AboutTitleStyle">
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="AboutContentStyle" parent="AboutTitleStyle">
+        <item name="android:textSize">16sp</item>
+    </style>
+
 </resources>

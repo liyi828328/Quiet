@@ -249,11 +249,12 @@ public class ArrowDownloadButton extends View {
     private void init() {
         //TODO:修改色值为app主题色
         mViewBackgroundColor = getResources().getColor(R.color.quiet_theme_color, null);
-
-        float temp = getHeight() > getWidth() ? getWidth() / 2 : getHeight() / 2;
+        int width = getWidth();
+        int height = getHeight();
+        float temp = height > width ? width / 2 : height / 2;
         radius = temp - temp * OFFSET / RADIUS - temp * ELASTICITY_STEP / RADIUS - 6;
-        x = getPaddingLeft() + getWidth() / 2;
-        y = getPaddingTop() + getHeight() / 2;
+        x = getPaddingLeft() + width / 2;
+        y = getPaddingTop() + height / 2;
         maxWaveHeight = convert(MAX_WAVE_HEIGHT);
         minWaveHeight = convert(MIN_WAVE_HEIGHT);
         textY = convert(TEXT_Y);

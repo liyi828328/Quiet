@@ -188,7 +188,6 @@ public class HomePresenter extends BasePresenter<IHomeView> implements IHomePres
     public void changeLoadDataByType(QuietPageType type) {
         //TODO:一下if中的页面还没有做，直接return
         if (type == null || type.equals(mCurrentPageType)
-                || type.equals(QuietPageType.QUIET_ABOUT_TYPE)
                 || type.equals(QuietPageType.QUIET_APP_SHARE_TYPE)
                 || type.equals(QuietPageType.QUIET_RECREATION_TYPE)
                 || type.equals(QuietPageType.QUIET_SHARE_TYPE)) {

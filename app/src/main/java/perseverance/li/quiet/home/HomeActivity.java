@@ -14,11 +14,11 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.List;
 
 import perseverance.li.quiet.R;
+import perseverance.li.quiet.about.AboutActivity;
 import perseverance.li.quiet.base.BaseActivity;
 import perseverance.li.quiet.base.OnRecyclerViewItemClickListener;
 import perseverance.li.quiet.bean.BaseGankData;
@@ -147,8 +147,9 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements Navigat
                 quietPageType = QuietPageType.QUIET_SHARE_TYPE;
                 break;
             case R.id.nav_about:
-                quietPageType = QuietPageType.QUIET_ABOUT_TYPE;
-                break;
+                Intent aboutIntent = new Intent(mActivity, AboutActivity.class);
+                startActivity(aboutIntent);
+                return true;
         }
         mPresenter.changeLoadDataByType(quietPageType);
         mDrawerLayout.closeDrawer(GravityCompat.START);

@@ -25,7 +25,7 @@ public class DailyModule implements Serializable {
     @SerializedName("category")
     public ArrayList<String> category;
 
-    public class DailyResults implements Serializable {
+    public static class DailyResults implements Serializable {
 
         @SerializedName("福利")
         public ArrayList<BaseGankData> welfareData;
