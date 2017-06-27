@@ -22,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class RetrofitManager {
 
-    private static RetrofitManager mInstance;
+    private static volatile RetrofitManager mInstance;
     private static final long DEFAULT_TIMEOUT = 5;
     private static Retrofit mRetrofit;
 

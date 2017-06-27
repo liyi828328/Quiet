@@ -51,7 +51,7 @@ public class WelfareDataAdapter extends BaseRVAdapter<BaseGankData> {
             ViewGroup.LayoutParams params = welfareImage.getLayoutParams();
             params.height = mHeights.get(url);
             welfareImage.setLayoutParams(params);
-            GlideUtil.displayUrl(mActivity, welfareImage, url, R.mipmap.img_default_gray);
+            GlideUtil.displayUrl(mActivity, welfareImage, url);
         }
     }
 

@@ -33,6 +33,8 @@ import perseverance.li.quiet.util.GlideUtil;
  */
 public class DailyDataAdapter extends BaseRVAdapter<DailyModule> {
 
+    private String mCurrentDate;
+
     public DailyDataAdapter(Activity activity) {
         super(activity);
     }
@@ -55,7 +57,7 @@ public class DailyDataAdapter extends BaseRVAdapter<DailyModule> {
             if (gankData != null) {
                 String imageUrl = gankData.url;
                 if (!TextUtils.isEmpty(imageUrl)) {
-                    GlideUtil.displayUrl(mActivity, iconView, imageUrl, R.mipmap.img_default_gray);
+                    GlideUtil.displayUrl(mActivity, iconView, imageUrl);
                 }
             }
         }
@@ -68,12 +70,16 @@ public class DailyDataAdapter extends BaseRVAdapter<DailyModule> {
                 try {
                     //set date
                     SimpleDateFormat sdf = new SimpleDateFormat(Constant.DAILY_DATE_FORMAT);
-                    date.setText(sdf.format(gankData.publishedAt));
+                    mCurrentDate = sdf.format(gankData.publishedAt);
+                    date.setText(mCurrentDate);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-
         }
+    }
+
+    public String getDate() {
+        return mCurrentDate;
     }
 }

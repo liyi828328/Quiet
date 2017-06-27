@@ -89,7 +89,6 @@ public class GankApiDateUtil {
             Calendar c = Calendar.getInstance();
             c.setTimeInMillis(time);
             GankApiDateUtil date = new GankApiDateUtil(c);
-//            Log.d(TAG,"get list time date year: " + date.getYear() + " month: " + date.getMonth() + " day: " + date.getDay());
             listTime.add(date);
         }
         return listTime;

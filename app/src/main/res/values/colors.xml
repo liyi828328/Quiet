@@ -4,4 +4,7 @@
     <color name="colorAccent">@color/colorPrimary</color>
     <color name="quiet_theme_color">#CE577A</color>
     <color name="nav_item_icon_selected_color">@color/quiet_theme_color</color>
+    <color name="text_bg">#99aaaaaa</color>
+    <color name="primary_text">#DE000000</color>
+    <color name="secondary_text">#8A000000</color>
 </resources>

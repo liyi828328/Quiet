@@ -217,7 +217,10 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements Navigat
                 startActivity(intent);
                 break;
             case QUIET_DAILY_TYPE:
+                DailyModule dailyModule = mDailyDataAdapter.getDataByPosition(position);
                 Intent dailyIntent = new Intent(this, DailyDetailActivity.class);
+                dailyIntent.putExtra(DailyDetailActivity.DAILY_DATA_KEY, dailyModule);
+                dailyIntent.putExtra(DailyDetailActivity.DAILY_TITLE_KEY, mDailyDataAdapter.getDate());
                 startActivity(dailyIntent);
                 break;
         }

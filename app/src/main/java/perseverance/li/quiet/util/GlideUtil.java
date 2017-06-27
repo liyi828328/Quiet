@@ -31,9 +31,8 @@ public class GlideUtil {
      * @param activity
      * @param view
      * @param url
-     * @param defaultImage
      */
-    public static void displayUrl(Activity activity, ImageView view, String url, @DrawableRes int defaultImage) {
+    public static void displayUrl(Activity activity, ImageView view, String url) {
         if (view == null) {
             throw new IllegalArgumentException("glide display url , view is null ");
         }

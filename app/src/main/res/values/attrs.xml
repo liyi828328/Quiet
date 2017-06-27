@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- WelfareImageVIew 属性 -->
+    <declare-styleable name="WelfareImageView">
+        <attr name="imageRatio" format="float" />
+        <attr name="imageRatioType">
+            <enum name="widthHeight" value="1" />
+            <enum name="heightWidth" value="2" />
+        </attr>
+    </declare-styleable>
+
+</resources>

@@ -20,4 +20,5 @@
     <string name="save_image_success">保存图片成功</string>
     <string name="save_image_fail">保存图片失败</string>
     <string name="look_forward_to">敬请期待</string>
+    <string name="load_fail">页面加载失败</string>
 </resources>

@@ -1,6 +1,9 @@
 package perseverance.li.quiet.detail.view;
 
+import java.util.List;
+
 import perseverance.li.quiet.base.IBaseView;
+import perseverance.li.quiet.bean.BaseGankData;
 
 /**
  * ---------------------------------------------------------------
@@ -16,6 +19,11 @@ import perseverance.li.quiet.base.IBaseView;
  */
 public interface IDailyDetailView extends IBaseView {
 
-
+    /**
+     * 将数据展示到view上
+     *
+     * @param dataList
+     */
+    void onLoadDataToView(List<BaseGankData> dataList);
 
 }
