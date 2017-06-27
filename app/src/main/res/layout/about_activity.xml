@@ -55,11 +55,13 @@
 
                 <TextView
                     style="@style/AboutContentStyle"
+                    android:autoLink="email"
                     android:text="邮箱 : perseverance_li@126.com" />
 
                 <TextView
                     style="@style/AboutContentStyle"
-                    android:text="Q Q : 442411824" />
+                    android:autoLink="web"
+                    android:text="GitHub : https://github.com/liyi828328/" />
             </LinearLayout>
 
 
@@ -82,6 +84,7 @@
 
                 <TextView
                     style="@style/AboutContentStyle"
+                    android:autoLink="web"
                     android:text="干货集中营 : http://gank.io/api" />
 
             </LinearLayout>
