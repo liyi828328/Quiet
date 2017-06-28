@@ -16,6 +16,7 @@ import com.bumptech.glide.request.target.Target;
 import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadListener;
 import com.liulishuo.filedownloader.FileDownloader;
+import com.liulishuo.filedownloader.model.FileDownloadStatus;
 
 import perseverance.li.quiet.base.BasePresenter;
 import perseverance.li.quiet.detail.view.IWelfareDetailView;
@@ -167,7 +168,11 @@ public class WelfarePresenter extends BasePresenter<IWelfareDetailView> implemen
     @Override
     public void destory() {
         super.destory();
-        //停止下载
-        FileDownloader.getImpl().pause(mDownloadId);
+        //如果不是完成状态，界面退出时暂停下载
+        byte downloadStatus = FileDownloader.getImpl().getStatus(mDownloadId, mDownloadFilePath);
+        if (FileDownloadStatus.completed != downloadStatus) {
+            FileDownloader.getImpl().pause(mDownloadId);
+        }
+        FileDownloader.getImpl().unBindService();
     }
 }

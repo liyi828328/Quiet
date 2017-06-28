@@ -149,6 +149,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements Navigat
             case R.id.nav_about:
                 Intent aboutIntent = new Intent(mActivity, AboutActivity.class);
                 startActivity(aboutIntent);
+                mDrawerLayout.closeDrawer(GravityCompat.START);
                 return true;
         }
         mPresenter.changeLoadDataByType(quietPageType);
