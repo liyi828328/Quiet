@@ -99,6 +99,10 @@ public abstract class BaseActivity<T extends BasePresenter> extends BaseToolbarA
             permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
 
+        if (!PermissionUtil.checkPermission(this, Manifest.permission.READ_PHONE_STATE)) {
+            permissionList.add(Manifest.permission.READ_PHONE_STATE);
+        }
+
         if (permissionList.size() > 0) {
             requestPermissions(permissionList.toArray(new String[permissionList.size()]),
                     REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);

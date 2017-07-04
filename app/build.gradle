@@ -10,10 +10,42 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
+    signingConfigs {
+        debug {
+            try {
+                storeFile file("Quiet_signature.jks")
+                storePassword KEYSTORE_PASSWORD
+                keyAlias "quiet"
+                keyPassword KEY_PASSWORD
+            } catch (ex) {
+                throw new InvalidUserDataException("You should define KEYSTORE_PASSWORD and KEY_PASSWORD in gradle.properties.")
+            }
+        }
+        release {
+            try {
+                storeFile file("Quiet_signature.jks")
+                storePassword KEYSTORE_PASSWORD
+                keyAlias "quiet"
+                keyPassword KEY_PASSWORD
+            } catch (ex) {
+                throw new InvalidUserDataException("You should define KEYSTORE_PASSWORD and KEY_PASSWORD in gradle.properties.")
+            }
+        }
+    }
+
     buildTypes {
+
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }
@@ -36,4 +68,6 @@ dependencies {
     compile 'com.liulishuo.filedownloader:library:1.5.7'
     //高斯模糊
     compile 'jp.wasabeef:blurry:2.1.1'
+    //微信
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
 }

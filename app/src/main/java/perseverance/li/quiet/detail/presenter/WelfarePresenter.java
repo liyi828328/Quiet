@@ -1,7 +1,7 @@
 package perseverance.li.quiet.detail.presenter;
 
 import android.app.Activity;
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
 import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -17,10 +17,15 @@ import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadListener;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.liulishuo.filedownloader.model.FileDownloadStatus;
+import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
+import com.tencent.mm.opensdk.modelmsg.WXImageObject;
+import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
 
+import perseverance.li.quiet.QuietApplication;
 import perseverance.li.quiet.base.BasePresenter;
 import perseverance.li.quiet.detail.view.IWelfareDetailView;
 import perseverance.li.quiet.util.GlideUtil;
+import perseverance.li.quiet.util.Util;
 
 /**
  * ---------------------------------------------------------------
@@ -36,11 +41,12 @@ import perseverance.li.quiet.util.GlideUtil;
  */
 public class WelfarePresenter extends BasePresenter<IWelfareDetailView> implements IWelfarePresenter {
 
+    private static final int THUMB_SIZE = 150;
     private static final String TAG = "WelfarePresenter";
     private static final String FILE_FOLDER = "/quiet/";
     private int mDownloadId;
     private String mDownloadFilePath;
-    private Drawable mDrawable;
+    private Bitmap mBitmap;
 
     @Override
     public void loadWelfarePicture(final Activity activity, ImageView view, String url) {
@@ -51,12 +57,11 @@ public class WelfarePresenter extends BasePresenter<IWelfareDetailView> implemen
         }
 
         Glide.with(activity)
+                .asBitmap()
                 .load(url)
-                .listener(new RequestListener<Drawable>() {
-
+                .listener(new RequestListener<Bitmap>() {
                     @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target,
-                                                boolean isFirstResource) {
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
                         if (mView != null) {
                             mView.onLoadFailure(new RuntimeException("glide load fail"));
                         }
@@ -64,9 +69,8 @@ public class WelfarePresenter extends BasePresenter<IWelfareDetailView> implemen
                     }
 
                     @Override
-                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target,
-                                                   DataSource dataSource, boolean isFirstResource) {
-                        mDrawable = resource;
+                    public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
+                        mBitmap = resource;
                         if (mView != null) {
                             mView.onLoadImageSuccess();
                         }
@@ -141,9 +145,22 @@ public class WelfarePresenter extends BasePresenter<IWelfareDetailView> implemen
     }
 
     @Override
-    public Drawable resetWelfarePicture() {
-        return mDrawable;
+    public Bitmap resetWelfarePicture() {
+        return mBitmap;
     }
+
+    @Override
+    public boolean sendPictureToWx() {
+        WXImageObject imgObj = new WXImageObject(mBitmap);
+        WXMediaMessage msg = new WXMediaMessage();
+        msg.mediaObject = imgObj;
+        SendMessageToWX.Req req = new SendMessageToWX.Req();
+        req.transaction = Util.buildTransaction("img");
+        req.message = msg;
+        req.scene = SendMessageToWX.Req.WXSceneTimeline;
+        return QuietApplication.getWxAPi().sendReq(req);
+    }
+
 
     /**
      * 获取文件保存的路径

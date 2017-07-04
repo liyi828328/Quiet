@@ -1,15 +1,15 @@
 package perseverance.li.quiet.detail;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-
 
 import java.io.File;
 
@@ -36,6 +36,7 @@ import perseverance.li.quiet.widget.ArrowDownloadButton;
  */
 public class WelfareDetailActivity extends BaseActivity<WelfarePresenter> implements IWelfareDetailView {
 
+    private static final String TAG = "WelfareDetailActivity";
     public static final String IMAGE_URL_TAG = "image_url";
     private static final long ANIM_TIME = 500;
     private String mImageUrl;
@@ -43,6 +44,7 @@ public class WelfareDetailActivity extends BaseActivity<WelfarePresenter> implem
     private ImageView mImageView;
     private ArrowDownloadButton mDownloadButton;
     private MenuItem mSaveMenu;
+    private MenuItem mShareMenu;
 
     @Override
     public WelfarePresenter getPresenter() {
@@ -84,22 +86,31 @@ public class WelfareDetailActivity extends BaseActivity<WelfarePresenter> implem
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_welfare, menu);
         mSaveMenu = menu.findItem(R.id.menu_save);
+        mShareMenu = menu.findItem(R.id.menu_share);
+        mShareMenu.setVisible(false);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.menu_save) {
-            mSaveMenu.setEnabled(false);
-            Blurry.with(mActivity)
-                    .radius(10)
-                    .sampling(8)
-                    .animate(500)
-                    .async(blurryListener)
-                    .capture(mImageView)
-                    .into(mImageView);
-            return true;
+        switch (id) {
+            case R.id.menu_save:
+                mSaveMenu.setEnabled(false);
+                Blurry.with(mActivity)
+                        .radius(10)
+                        .sampling(8)
+                        .animate(500)
+                        .async(blurryListener)
+                        .capture(mImageView)
+                        .into(mImageView);
+                return true;
+            case R.id.menu_share:
+                if (mPresenter != null) {
+                    boolean shareStatus = mPresenter.sendPictureToWx();
+                    Log.d(TAG, "share to wx sattus: " + shareStatus);
+                }
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -126,6 +137,9 @@ public class WelfareDetailActivity extends BaseActivity<WelfarePresenter> implem
     @Override
     public void onLoadImageSuccess() {
         mProgressBar.setVisibility(View.GONE);
+        if (mShareMenu != null) {
+            mShareMenu.setVisible(true);
+        }
     }
 
     private void resetView(boolean isSaveSuccess) {
@@ -135,9 +149,9 @@ public class WelfareDetailActivity extends BaseActivity<WelfarePresenter> implem
                 mDownloadButton.reset();
                 mDownloadButton.setVisibility(View.GONE);
                 if (mPresenter != null) {
-                    Drawable drawable = mPresenter.resetWelfarePicture();
-                    if (drawable != null) {
-                        mImageView.setImageDrawable(drawable);
+                    Bitmap bitmap = mPresenter.resetWelfarePicture();
+                    if (bitmap != null) {
+                        mImageView.setImageBitmap(bitmap);
                     }
                 }
                 mSaveMenu.setEnabled(true);

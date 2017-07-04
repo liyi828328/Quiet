@@ -1,7 +1,7 @@
 package perseverance.li.quiet.detail.presenter;
 
 import android.app.Activity;
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
 import android.widget.ImageView;
 
 /**
@@ -37,6 +37,13 @@ public interface IWelfarePresenter {
     /**
      * 去除高斯模糊
      */
-    Drawable resetWelfarePicture();
+    Bitmap resetWelfarePicture();
+
+    /**
+     * 分享图片到微信
+     *
+     * @return
+     */
+    boolean sendPictureToWx();
 
 }

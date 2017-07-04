@@ -3,7 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_save"
-        android:icon="@mipmap/ic_download"
+        android:icon="@mipmap/toolbar_download"
         android:title="@string/welfare_save"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menu_share"
+        android:icon="@mipmap/toolbar_share"
+        android:title="@string/welfare_share"
         app:showAsAction="always" />
 </menu>

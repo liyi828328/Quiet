@@ -13,6 +13,7 @@
     <string name="nav_title">更多</string>
     <string name="welfare_title">福利</string>
     <string name="welfare_save">保存图片</string>
+    <string name="welfare_share">分享</string>
     <string name="web_label">H5服务</string>
     <string name="daily_detail">每日新闻详情页</string>
     <string name="check_permission_result_toast">需要赋予必要权限才能使用应用</string>
