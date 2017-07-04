@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.DownloadListener;
 import android.webkit.WebChromeClient;
@@ -12,8 +14,14 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
+import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
+import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
+import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
+
+import perseverance.li.quiet.QuietApplication;
 import perseverance.li.quiet.R;
 import perseverance.li.quiet.base.BaseToolbarActivity;
+import perseverance.li.quiet.util.Util;
 
 /**
  * ---------------------------------------------------------------
@@ -31,6 +39,8 @@ public class WebActivity extends BaseToolbarActivity {
 
     public static final String TITLE_TAG = "title";
     public static final String URL_TAG = "url";
+    private String mWebUrl;
+    private String mTitle;
     private WebView mWebView;
     private ProgressBar mProgressBar;
 
@@ -57,6 +67,30 @@ public class WebActivity extends BaseToolbarActivity {
         mProgressBar = (ProgressBar) findViewById(R.id.webview_pb);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_web, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_share:
+                WXWebpageObject webpage = new WXWebpageObject();
+                webpage.webpageUrl = mWebUrl;
+                WXMediaMessage msg = new WXMediaMessage(webpage);
+                msg.title = mTitle;
+                SendMessageToWX.Req req = new SendMessageToWX.Req();
+                req.transaction = Util.buildTransaction("webpage");
+                req.message = msg;
+                req.scene = SendMessageToWX.Req.WXSceneTimeline;
+                QuietApplication.getWxAPi().sendReq(req);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     protected void onInitWebViewSettings() {
         WebSettingsUtil.initSettings(this, mWebView);
         WebChromeClient webChromeClient = new WebChromeClient() {
@@ -80,13 +114,13 @@ public class WebActivity extends BaseToolbarActivity {
     }
 
     private void loadUrl() {
-        String title = getIntent().getStringExtra(TITLE_TAG);
-        if (TextUtils.isEmpty(title)) {
-            title = getResources().getString(R.string.web_label);
+        mTitle = getIntent().getStringExtra(TITLE_TAG);
+        if (TextUtils.isEmpty(mTitle)) {
+            mTitle = getResources().getString(R.string.web_label);
         }
-        mActionbar.setTitle(title);
-        String url = getIntent().getStringExtra(URL_TAG);
-        mWebView.loadUrl(url);
+        mActionbar.setTitle(mTitle);
+        mWebUrl = getIntent().getStringExtra(URL_TAG);
+        mWebView.loadUrl(mWebUrl);
     }
 
     class WebDownloadListener implements DownloadListener {

@@ -41,7 +41,6 @@ import perseverance.li.quiet.util.Util;
  */
 public class WelfarePresenter extends BasePresenter<IWelfareDetailView> implements IWelfarePresenter {
 
-    private static final int THUMB_SIZE = 150;
     private static final String TAG = "WelfarePresenter";
     private static final String FILE_FOLDER = "/quiet/";
     private int mDownloadId;
