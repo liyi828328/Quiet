@@ -1,6 +1,8 @@
 package perseverance.li.quiet.web;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -39,6 +41,7 @@ public class WebActivity extends BaseToolbarActivity {
 
     public static final String TITLE_TAG = "title";
     public static final String URL_TAG = "url";
+    private static final int THUMB_SIZE = 150;
     private String mWebUrl;
     private String mTitle;
     private WebView mWebView;
@@ -81,6 +84,12 @@ public class WebActivity extends BaseToolbarActivity {
                 webpage.webpageUrl = mWebUrl;
                 WXMediaMessage msg = new WXMediaMessage(webpage);
                 msg.title = mTitle;
+
+                Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.share_logo);
+                Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, THUMB_SIZE, THUMB_SIZE, true);
+                bmp.recycle();
+                msg.thumbData = Util.bmpToByteArray(thumbBmp, true);
+
                 SendMessageToWX.Req req = new SendMessageToWX.Req();
                 req.transaction = Util.buildTransaction("webpage");
                 req.message = msg;
