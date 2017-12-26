@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -130,6 +131,17 @@ public class WebActivity extends BaseToolbarActivity {
         mActionbar.setTitle(mTitle);
         mWebUrl = getIntent().getStringExtra(URL_TAG);
         mWebView.loadUrl(mWebUrl);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mWebView != null) {
+            Log.d("liyi","webview destory");
+            mWebView.removeAllViews();
+            mWebView.destroy();
+            mWebView = null;
+        }
     }
 
     class WebDownloadListener implements DownloadListener {
