@@ -3,6 +3,7 @@ package perseverance.li.quiet;
 import android.app.Application;
 
 import com.liulishuo.filedownloader.FileDownloader;
+import com.squareup.leakcanary.LeakCanary;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
@@ -29,8 +30,15 @@ public class QuietApplication extends Application {
         /**
          * 文件下载工具初始化
          */
-        FileDownloader.init(getApplicationContext());
+        FileDownloader.setup(getApplicationContext());
         regToWx();
+
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
     }
 
     private void regToWx() {
