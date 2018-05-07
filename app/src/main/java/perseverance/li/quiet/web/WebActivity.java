@@ -136,11 +136,17 @@ public class WebActivity extends BaseToolbarActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mWebView != null) {
-            Log.d("liyi","webview destory");
-            mWebView.removeAllViews();
-            mWebView.destroy();
-            mWebView = null;
+        try {
+            if (mWebView != null) {
+                mWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
+                mWebView.clearHistory();
+
+                mWebView.removeAllViews();
+                mWebView.destroy();
+                mWebView = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

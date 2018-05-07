@@ -49,6 +49,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements Navigat
     private SpacingItemDecoration mStaggeredDecoration;
     private LinearLayoutManager mLinearLayoutManager;
     private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
+    private boolean isFirstLoadNotData = true;
 
     @Override
     public HomePresenter getPresenter() {
@@ -152,6 +153,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements Navigat
                 mDrawerLayout.closeDrawer(GravityCompat.START);
                 return true;
         }
+        isFirstLoadNotData = true;
         mPresenter.changeLoadDataByType(quietPageType);
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -160,7 +162,11 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements Navigat
     @Override
     public void onLoadFailure(Throwable e) {
         Log.d(TAG, "HomeActivity on load failure");
-        mSwipeRefreshLayout.setRefreshing(false);
+        if (isFirstLoadNotData) {
+            mPresenter.loadMoreData();
+        } else {
+            mSwipeRefreshLayout.setRefreshing(false);
+        }
 
     }
 
@@ -175,6 +181,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements Navigat
         mDailyDataAdapter.setDataList(dailyModules);
         mDailyDataAdapter.notifyDataSetChanged();
         mSwipeRefreshLayout.setRefreshing(false);
+        isFirstLoadNotData = false;
     }
 
     @Override
@@ -183,6 +190,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements Navigat
         mWelfareDataAdapter.setDataList(welfareDatas);
         mWelfareDataAdapter.notifyDataSetChanged();
         mSwipeRefreshLayout.setRefreshing(false);
+        isFirstLoadNotData = false;
     }
 
     @Override

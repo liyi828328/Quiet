@@ -119,6 +119,20 @@ public class HomePresenter extends BasePresenter<IHomeView> implements IHomePres
         DisposableObserver<List<DailyModule>> listDisposableObserver = new DisposableObserver<List<DailyModule>>() {
             @Override
             public void onNext(@NonNull List<DailyModule> dailyModules) {
+                if (dailyModules != null) {
+                    //去掉无效数据
+                    Iterator<DailyModule> iterator = dailyModules.iterator();
+                    while (iterator.hasNext()) {
+                        DailyModule dailyModule = iterator.next();
+                        if (dailyModule == null || dailyModule.category == null || dailyModule.category.size() == 0 || dailyModule.results == null) {
+                            iterator.remove();
+                        }
+                    }
+                }
+
+                //刷新一次后页面数量+1
+                mCurrentPage++;
+                mCurrentDate.setCurrentPagePosition(mCurrentPage);
 
                 if (dailyModules == null || dailyModules.size() == 0) {
                     Log.d(TAG, "load daily datas is null , return on load failure");
@@ -128,26 +142,12 @@ public class HomePresenter extends BasePresenter<IHomeView> implements IHomePres
                     return;
                 }
 
-                Log.d(TAG, "onNext dailyModules size: " + dailyModules.size());
-
-                //去掉无效数据
-                Iterator<DailyModule> iterator = dailyModules.iterator();
-                while (iterator.hasNext()) {
-                    DailyModule dailyModule = iterator.next();
-                    if (dailyModule == null || dailyModule.category == null || dailyModule.category.size() == 0 || dailyModule.results == null) {
-                        iterator.remove();
-                    }
-                }
-
                 Log.d(TAG, "onNext dailyModules size iterator end: " + dailyModules.size());
                 //回调界面
                 if (mView != null) {
                     mDailyModuleList.addAll(dailyModules);
                     mView.onLoadDailyDatasSuccess(mDailyModuleList);
                 }
-                //刷新成功一次后页面数量+1
-                mCurrentPage++;
-                mCurrentDate.setCurrentPagePosition(mCurrentPage);
             }
 
             @Override
