@@ -61,7 +61,7 @@ public class DailyDetailActivity extends BaseActivity<DailyDetailPresenter> impl
         mDailyRecyclerView.setAdapter(mAdapter);
 
         if (mPresenter != null) {
-            DailyModule dailyModule = (DailyModule) getIntent().getSerializableExtra(DAILY_DATA_KEY);
+            DailyModule dailyModule = getIntent().getParcelableExtra(DAILY_DATA_KEY);
             Log.d(TAG, "get intent dailyModule : " + dailyModule.toString());
             mPresenter.transitionData(dailyModule);
         }
