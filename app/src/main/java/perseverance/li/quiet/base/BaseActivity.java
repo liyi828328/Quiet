@@ -92,7 +92,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends BaseToolbarA
     protected void onDestroy() {
         super.onDestroy();
         if (mPresenter != null) {
-            mPresenter.destory();
+            mPresenter.destroy();
             mPresenter = null;
         }
         ToastUtil.hideToast();

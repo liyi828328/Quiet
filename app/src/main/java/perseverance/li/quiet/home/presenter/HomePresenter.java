@@ -241,8 +241,8 @@ public class HomePresenter extends BasePresenter<IHomeView> implements IHomePres
     }
 
     @Override
-    public void destory() {
-        super.destory();
+    public void destroy() {
+        super.destroy();
 
         mCurrentDate = null;
         mCurrentPage = 1;

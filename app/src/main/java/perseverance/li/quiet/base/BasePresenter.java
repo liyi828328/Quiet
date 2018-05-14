@@ -66,13 +66,13 @@ public abstract class BasePresenter<T extends IBaseView> {
     /**
      * Activity退出，销毁引用等，防止内存泄露
      */
-    public void destory() {
+    public void destroy() {
         detachView();
         //将所有的observer取消订阅
         mCompositeDisposable.clear();
         mCompositeDisposable = null;
 
-        Log.d(TAG, "BasePresenter destory mCompositeDisposable: " + mCompositeDisposable);
+        Log.d(TAG, "BasePresenter destroy mCompositeDisposable: " + mCompositeDisposable);
     }
 
 }

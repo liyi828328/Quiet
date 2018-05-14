@@ -182,8 +182,8 @@ public class WelfarePresenter extends BasePresenter<IWelfareDetailView> implemen
     }
 
     @Override
-    public void destory() {
-        super.destory();
+    public void destroy() {
+        super.destroy();
         //如果不是完成状态，界面退出时暂停下载
         byte downloadStatus = FileDownloader.getImpl().getStatus(mDownloadId, mDownloadFilePath);
         if (FileDownloadStatus.completed != downloadStatus) {
