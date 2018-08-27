@@ -15,6 +15,7 @@ import android.webkit.DownloadListener;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
@@ -47,6 +48,7 @@ public class WebActivity extends BaseToolbarActivity {
     private String mTitle;
     private WebView mWebView;
     private ProgressBar mProgressBar;
+    private LinearLayout mContentLayout;
 
     @Override
     protected void onMenuHome() {
@@ -69,6 +71,7 @@ public class WebActivity extends BaseToolbarActivity {
     private void initView() {
         mWebView = (WebView) findViewById(R.id.h5_webview);
         mProgressBar = (ProgressBar) findViewById(R.id.webview_pb);
+        mContentLayout = (LinearLayout) findViewById(R.id.content_layout);
     }
 
     @Override
@@ -137,6 +140,12 @@ public class WebActivity extends BaseToolbarActivity {
     protected void onDestroy() {
         super.onDestroy();
         try {
+            //1.先把webview移除
+            if (mContentLayout != null && mContentLayout.getChildCount() != 0) {
+                mContentLayout.removeView(mWebView);
+            }
+
+            //2.再将webview内容置空
             if (mWebView != null) {
                 mWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
                 mWebView.clearHistory();
