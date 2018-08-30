@@ -1,17 +1,13 @@
 package perseverance.li.quiet.web;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.DownloadListener;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -49,6 +45,7 @@ public class WebActivity extends BaseToolbarActivity {
     private WebView mWebView;
     private ProgressBar mProgressBar;
     private LinearLayout mContentLayout;
+    private WebDownloadListener mWebDownloadListener;
 
     @Override
     protected void onMenuHome() {
@@ -118,11 +115,12 @@ public class WebActivity extends BaseToolbarActivity {
                 }
             }
         };
+        mWebDownloadListener = new WebDownloadListener(this);
         mWebView.setWebChromeClient(webChromeClient);
         WebViewClient webViewClient = new WebViewClient();
         mWebView.setWebViewClient(webViewClient);
         mWebView.setOverScrollMode(View.OVER_SCROLL_NEVER);
-        mWebView.setDownloadListener(new WebDownloadListener());
+        mWebView.setDownloadListener(mWebDownloadListener);
         mWebView.requestFocus();
     }
 
@@ -154,21 +152,13 @@ public class WebActivity extends BaseToolbarActivity {
                 mWebView.destroy();
                 mWebView = null;
             }
+
+            if (mWebDownloadListener != null) {
+                mWebDownloadListener.onDestroy();
+                mWebDownloadListener = null;
+            }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-
-    class WebDownloadListener implements DownloadListener {
-
-        @Override
-        public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
-            try {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                startActivity(intent);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
     }
 }
